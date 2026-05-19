@@ -1,0 +1,43 @@
+[
+  {
+    "Author": "嗨呀",
+    "Name": "Browsingway",
+    "InternalName": "Browsingway",
+    "AssemblyVersion": "1.7.3",
+    "Punchline": "GPU-accelerated browser overlays in-game, with external IPC API.",
+    "Description": "GPU-accelerated browser overlays with external IPC API for plugin control. Based on BrowserHost by ackwell.",
+    "ApplicableVersion": "any",
+    "RepoUrl": "https://github.com/denghaoxuan991876906/Browsingway",
+    "Tags": [
+      "browser",
+      "overlay",
+      "chromium",
+      "cef",
+      "webui"
+    ],
+    "DalamudApiLevel": 15,
+    "AcceptsFeedback": true,
+    "DownloadLinkInstall": "https://github.com/denghaoxuan991876906/Browsingway/releases/download/v1.7.3.0/latest.zip",
+    "DownloadLinkUpdate": "https://github.com/denghaoxuan991876906/Browsingway/releases/download/v1.7.3.0/latest.zip"
+  },
+  {
+    "Author": "嗨呀",
+    "Name": "MCP for Dalamud",
+    "InternalName": "MCPforDalamud",
+    "AssemblyVersion": "0.1.1",
+    "Punchline": "MCP服务插件",
+    "Description": "MCP(Model Context Protocol)服务插件，让AI工具获取FFXIV游戏实时数据、操作角色/系统，以及与插件交互测试。",
+    "ApplicableVersion": "any",
+    "RepoUrl": "https://github.com/denghaoxuan991876906/MCPforDalamud",
+    "Tags": [
+      "utility",
+      "mcp",
+      "ai",
+      "development"
+    ],
+    "DalamudApiLevel": 15,
+    "AcceptsFeedback": true,
+    "DownloadLinkInstall": "https://github.com/denghaoxuan991876906/MCPforDalamud/releases/download/0.1.1.0/MCPforDalamud.zip",
+    "DownloadLinkUpdate": "https://github.com/denghaoxuan991876906/MCPforDalamud/releases/download/0.1.1.0/MCPforDalamud.zip"
+  }
+]

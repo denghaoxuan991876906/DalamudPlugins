@@ -51,9 +51,9 @@ https://github.com/denghaoxuan991876906/DalamudPlugins/releases/download/<Intern
 
 ### Token 配置
 
-`repository_dispatch` 跨仓库触发，`GITHUB_TOKEN` 不够用，需新建一个对本仓库有写权限的凭据，加到**各插件源仓库**的 Secret（名为 `DALAMUDPLUGINS_PAT`）：
+`repository_dispatch` 跨仓库触发，`GITHUB_TOKEN` 不够用。需新建凭据加到**各插件源仓库**的 Secret（名为 `DALAMUDPLUGINS_PAT`），且该凭据必须能写 **DalamudPlugins（本仓库）**：
 
-- **Fine-grained PAT**（推荐）：对本仓库开 `Contents: Read and write` + `Actions: Read and write`。
-- 或 **Classic PAT**：勾选 `repo`。
+- **Classic PAT**（最简单可靠）：勾选 `repo` scope 即可触发 dispatch。
+- 或 **Fine-grained PAT**：Repository access **必须选中** `denghaoxuan991876906/DalamudPlugins`，权限开 `Contents: Read and write` + `Metadata: Read`（dispatch 端点归属于 Contents 权限；漏选目标仓库，或只给 Actions: Write，都会报 `403 Resource not accessible`）。
 
 > 也可以在本仓库 Actions 页用 `workflow_dispatch` 手动触发 `Publish Plugin`，填入 `internal_name` / `version` / `zip_url` 来发布或重新发布某个版本。

@@ -1,0 +1,19 @@
+{
+  "Author": "嗨呀",
+  "Name": "Browsingway",
+  "InternalName": "Browsingway",
+  "AssemblyVersion": "1.7.3.0",
+  "Punchline": "GPU-accelerated browser overlays in-game, with external IPC API.",
+  "Description": "GPU-accelerated browser overlays with external IPC API for plugin control. Based on BrowserHost by ackwell.",
+  "ApplicableVersion": "any",
+  "RepoUrl": "https://github.com/denghaoxuan991876906/Browsingway",
+  "Tags": [
+    "browser",
+    "overlay",
+    "chromium",
+    "cef",
+    "webui"
+  ],
+  "DalamudApiLevel": 15,
+  "AcceptsFeedback": true
+}

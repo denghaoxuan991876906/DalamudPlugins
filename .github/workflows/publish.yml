@@ -1,0 +1,80 @@
+name: Publish Plugin
+
+# Entry point for plugin releases. A plugin's own release workflow triggers this
+# via repository_dispatch (event_type=publish-plugin) with client_payload:
+#   { internal_name, version, zip_url }
+# This workflow:
+#   1. downloads the plugin zip from zip_url
+#   2. uploads it as `latest.zip` to a GitHub Release tagged <InternalName>-v<Version>
+#   3. bumps the AssemblyVersion in plugins/<InternalName>/<InternalName>.json
+#   4. regenerates pluginmaster.json and commits everything
+on:
+  repository_dispatch:
+    types: [publish-plugin]
+  workflow_dispatch:
+    inputs:
+      internal_name:
+        description: Plugin InternalName (must match its folder)
+        required: true
+      version:
+        description: Assembly version (e.g. 1.0.0.0)
+        required: true
+      zip_url:
+        description: URL to the built latest.zip (e.g. source repo release asset)
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve inputs
+        run: |
+          INTERNAL="${{ github.event.client_payload.internal_name || github.event.inputs.internal_name }}"
+          VERSION="${{ github.event.client_payload.version || github.event.inputs.version }}"
+          ZIP_URL="${{ github.event.client_payload.zip_url || github.event.inputs.zip_url }}"
+          {
+            echo "INTERNAL=$INTERNAL"
+            echo "VERSION=$VERSION"
+            echo "ZIP_URL=$ZIP_URL"
+            echo "TAG=$INTERNAL-v$VERSION"
+          } >> "$GITHUB_ENV"
+
+      - name: Download zip
+        run: curl -fL "${{ env.ZIP_URL }}" -o latest.zip
+
+      - name: Create release & upload latest.zip
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.TAG }}
+          name: ${{ env.TAG }}
+          files: latest.zip
+
+      - name: Update manifest & regenerate pluginmaster.json
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          internal = "${{ env.INTERNAL }}"
+          version = "${{ env.VERSION }}"
+          p = pathlib.Path(f"plugins/{internal}/{internal}.json")
+          if not p.exists():
+              raise SystemExit(f"missing manifest: {p}")
+          data = json.loads(p.read_text(encoding="utf-8"))
+          data["AssemblyVersion"] = version
+          p.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          PY
+          python3 generate_pluginmaster.py
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore(publish): ${{ env.INTERNAL }} v${{ env.VERSION }}" || echo "nothing to commit"
+          git push

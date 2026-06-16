@@ -3,7 +3,7 @@
     "Author": "嗨呀",
     "Name": "Browsingway",
     "InternalName": "Browsingway",
-    "AssemblyVersion": "1.7.3",
+    "AssemblyVersion": "1.7.3.0",
     "Punchline": "GPU-accelerated browser overlays in-game, with external IPC API.",
     "Description": "GPU-accelerated browser overlays with external IPC API for plugin control. Based on BrowserHost by ackwell.",
     "ApplicableVersion": "any",
@@ -17,14 +17,17 @@
     ],
     "DalamudApiLevel": 15,
     "AcceptsFeedback": true,
-    "DownloadLinkInstall": "https://github.com/denghaoxuan991876906/Browsingway/releases/download/v1.7.3.0/latest.zip",
-    "DownloadLinkUpdate": "https://github.com/denghaoxuan991876906/Browsingway/releases/download/v1.7.3.0/latest.zip"
+    "DownloadLinkInstall": "https://github.com/denghaoxuan991876906/DalamudPlugins/releases/download/Browsingway-v1.7.3.0/latest.zip",
+    "DownloadLinkUpdate": "https://github.com/denghaoxuan991876906/DalamudPlugins/releases/download/Browsingway-v1.7.3.0/latest.zip",
+    "LastUpdate": 0,
+    "IsHide": "False",
+    "IsTestingExclusive": "False"
   },
   {
     "Author": "嗨呀",
     "Name": "MCP for Dalamud",
     "InternalName": "MCPforDalamud",
-    "AssemblyVersion": "0.1.1",
+    "AssemblyVersion": "0.1.1.0",
     "Punchline": "MCP服务插件",
     "Description": "MCP(Model Context Protocol)服务插件，让AI工具获取FFXIV游戏实时数据、操作角色/系统，以及与插件交互测试。",
     "ApplicableVersion": "any",
@@ -37,7 +40,31 @@
     ],
     "DalamudApiLevel": 15,
     "AcceptsFeedback": true,
-    "DownloadLinkInstall": "https://github.com/denghaoxuan991876906/MCPforDalamud/releases/download/0.1.1.0/MCPforDalamud.zip",
-    "DownloadLinkUpdate": "https://github.com/denghaoxuan991876906/MCPforDalamud/releases/download/0.1.1.0/MCPforDalamud.zip"
+    "DownloadLinkInstall": "https://github.com/denghaoxuan991876906/DalamudPlugins/releases/download/MCPforDalamud-v0.1.1.0/latest.zip",
+    "DownloadLinkUpdate": "https://github.com/denghaoxuan991876906/DalamudPlugins/releases/download/MCPforDalamud-v0.1.1.0/latest.zip",
+    "LastUpdate": 0,
+    "IsHide": "False",
+    "IsTestingExclusive": "False"
+  },
+  {
+    "Author": "嗨呀",
+    "Name": "RemoteRelay",
+    "InternalName": "RemoteRelay",
+    "AssemblyVersion": "0.1.0.0",
+    "Punchline": "遥控指令中继",
+    "Description": "房间管理 / 玩家职能 / 指令分发 / IPC 提供方。替代 XSZToolbox 房间服务的精简可分发插件。",
+    "ApplicableVersion": "any",
+    "RepoUrl": "https://github.com/denghaoxuan991876906/RemoteRelay",
+    "Tags": [
+      "combat",
+      "auto"
+    ],
+    "DalamudApiLevel": 15,
+    "AcceptsFeedback": true,
+    "DownloadLinkInstall": "https://github.com/denghaoxuan991876906/DalamudPlugins/releases/download/RemoteRelay-v0.1.0.0/latest.zip",
+    "DownloadLinkUpdate": "https://github.com/denghaoxuan991876906/DalamudPlugins/releases/download/RemoteRelay-v0.1.0.0/latest.zip",
+    "LastUpdate": 0,
+    "IsHide": "False",
+    "IsTestingExclusive": "False"
   }
 ]

@@ -1,0 +1,37 @@
+name: Regenerate PluginMaster
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'plugins/**'
+      - 'generate_pluginmaster.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    # publish.yml (bot) already regenerates; only react to human edits here.
+    if: github.actor != 'github-actions[bot]'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate pluginmaster.json
+        run: python3 generate_pluginmaster.py
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pluginmaster.json
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "chore: regenerate pluginmaster.json"
+            git push
+          fi

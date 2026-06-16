@@ -33,8 +33,10 @@ def main() -> None:
         version = data["AssemblyVersion"]
         tag = f"{internal}-v{version}"
         url = f"https://github.com/{META_REPO}/releases/download/{tag}/latest.zip"
-        data["DownloadLinkInstall"] = url
-        data["DownloadLinkUpdate"] = url
+        # Respect a hand-set DownloadLinkInstall (e.g. a plugin that hosts its
+        # own release on its public repo); otherwise default to this repo.
+        data.setdefault("DownloadLinkInstall", url)
+        data.setdefault("DownloadLinkUpdate", url)
         data["LastUpdate"] = last_commit_ts(jf)
         data.setdefault("IsHide", "False")
         data.setdefault("IsTestingExclusive", "False")

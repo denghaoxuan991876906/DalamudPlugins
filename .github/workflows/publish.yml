@@ -1,13 +1,11 @@
 name: Publish Plugin
 
-# Entry point for plugin releases. A plugin's own release workflow triggers this
-# via repository_dispatch (event_type=publish-plugin) with client_payload:
-#   { internal_name, version, zip_url }
-# This workflow:
-#   1. downloads the plugin zip from zip_url
-#   2. uploads it as `latest.zip` to a GitHub Release tagged <InternalName>-v<Version>
-#   3. bumps the AssemblyVersion in plugins/<InternalName>/<InternalName>.json
-#   4. regenerates pluginmaster.json and commits everything
+# Updates a plugin's manifest in this repo from a release notification.
+# Triggered by each plugin's own release workflow via repository_dispatch, or
+# manually. Only updates plugins/<Internal>/<Internal>.json (AssemblyVersion +
+# DownloadLinkInstall/Update) and regenerates pluginmaster.json — it does NOT
+# download or re-host the zip (plugins host their own releases; for private
+# source repos use the "direct write" pattern instead).
 on:
   repository_dispatch:
     types: [publish-plugin]
@@ -20,7 +18,7 @@ on:
         description: Assembly version (e.g. 1.0.0.0)
         required: true
       zip_url:
-        description: URL to the built latest.zip (e.g. source repo release asset)
+        description: Public URL of the plugin zip (plugin's own release asset)
         required: true
 
 permissions:
@@ -36,38 +34,28 @@ jobs:
 
       - name: Resolve inputs
         run: |
-          INTERNAL="${{ github.event.client_payload.internal_name || github.event.inputs.internal_name }}"
-          VERSION="${{ github.event.client_payload.version || github.event.inputs.version }}"
-          ZIP_URL="${{ github.event.client_payload.zip_url || github.event.inputs.zip_url }}"
           {
-            echo "INTERNAL=$INTERNAL"
-            echo "VERSION=$VERSION"
-            echo "ZIP_URL=$ZIP_URL"
-            echo "TAG=$INTERNAL-v$VERSION"
+            echo "INTERNAL=${{ github.event.client_payload.internal_name || github.event.inputs.internal_name }}"
+            echo "VERSION=${{ github.event.client_payload.version || github.event.inputs.version }}"
+            echo "ZIP_URL=${{ github.event.client_payload.zip_url || github.event.inputs.zip_url }}"
           } >> "$GITHUB_ENV"
-
-      - name: Download zip
-        run: curl -fL "${{ env.ZIP_URL }}" -o latest.zip
-
-      - name: Create release & upload latest.zip
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ env.TAG }}
-          name: ${{ env.TAG }}
-          files: latest.zip
 
       - name: Update manifest & regenerate pluginmaster.json
         run: |
           python3 - <<'PY'
-          import json, pathlib
-          internal = "${{ env.INTERNAL }}"
-          version = "${{ env.VERSION }}"
+          import json, pathlib, os
+          internal = os.environ["INTERNAL"]
+          version = os.environ["VERSION"]
+          zip_url = os.environ["ZIP_URL"]
           p = pathlib.Path(f"plugins/{internal}/{internal}.json")
           if not p.exists():
               raise SystemExit(f"missing manifest: {p}")
           data = json.loads(p.read_text(encoding="utf-8"))
           data["AssemblyVersion"] = version
+          data["DownloadLinkInstall"] = zip_url
+          data["DownloadLinkUpdate"] = zip_url
           p.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          print(f"{internal} -> {version} @ {zip_url}")
           PY
           python3 generate_pluginmaster.py
 

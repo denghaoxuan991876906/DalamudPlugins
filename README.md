@@ -44,7 +44,9 @@ https://github.com/denghaoxuan991876906/DalamudPlugins/releases/download/<Intern
   run: |
     gh api -X POST /repos/denghaoxuan991876906/DalamudPlugins/dispatches \
       -f event_type=publish-plugin \
-      -f 'client_payload={"internal_name":"MyPlugin","version":"1.0.0.0","zip_url":"https://github.com/ME/MyPlugin/releases/download/v1.0.0.0/latest.zip"}'
+      -f client_payload[internal_name]=MyPlugin \
+      -f client_payload[version]=1.0.0.0 \
+      -f client_payload[zip_url]=https://github.com/ME/MyPlugin/releases/download/v1.0.0.0/latest.zip
 ```
 
 `publish.yml` 收到后会：下载该 zip → 上传到本仓库 Release（tag `MyPlugin-v1.0.0.0`，asset 名 `latest.zip`）→ 更新 `AssemblyVersion` → 重算 `pluginmaster.json`。

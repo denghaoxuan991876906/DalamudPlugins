@@ -50,7 +50,7 @@
     "Author": "嗨呀",
     "Name": "RemoteRelay",
     "InternalName": "RemoteRelay",
-    "AssemblyVersion": "0.1.0.0",
+    "AssemblyVersion": "0.1.2.0",
     "Punchline": "遥控指令中继",
     "Description": "房间管理 / 玩家职能 / 指令分发 / IPC 提供方。替代 XSZToolbox 房间服务的精简可分发插件。",
     "ApplicableVersion": "any",
@@ -61,9 +61,9 @@
     ],
     "DalamudApiLevel": 15,
     "AcceptsFeedback": true,
-    "DownloadLinkInstall": "https://github.com/denghaoxuan991876906/DalamudPlugins/releases/download/RemoteRelay-v0.1.0.0/latest.zip",
-    "DownloadLinkUpdate": "https://github.com/denghaoxuan991876906/DalamudPlugins/releases/download/RemoteRelay-v0.1.0.0/latest.zip",
-    "LastUpdate": 1781616046,
+    "DownloadLinkInstall": "https://github.com/denghaoxuan991876906/DalamudPlugins/releases/download/RemoteRelay-v0.1.2.0/latest.zip",
+    "DownloadLinkUpdate": "https://github.com/denghaoxuan991876906/DalamudPlugins/releases/download/RemoteRelay-v0.1.2.0/latest.zip",
+    "LastUpdate": 1781624021,
     "IsHide": "False",
     "IsTestingExclusive": "False"
   }

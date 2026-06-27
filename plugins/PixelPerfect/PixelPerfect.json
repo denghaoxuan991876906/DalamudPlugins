@@ -2,7 +2,7 @@
   "Author": "嗨呀",
   "Name": "判定点指示器",
   "InternalName": "PixelPerfect",
-  "AssemblyVersion": "3.3.4.0",
+  "AssemblyVersion": "3.3.4.1",
   "Punchline": "即开即用的角色判定点指示器。",
   "Description": "显示角色判定点，支持圆点/圆环样式与基础显示条件。",
   "ApplicableVersion": "any",

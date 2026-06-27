@@ -74,6 +74,28 @@
   },
   {
     "Author": "嗨呀",
+    "Name": "判定点指示器",
+    "InternalName": "PixelPerfect",
+    "AssemblyVersion": "3.3.4.0",
+    "Punchline": "即开即用的角色判定点指示器。",
+    "Description": "显示角色判定点，支持圆点/圆环样式与基础显示条件。",
+    "ApplicableVersion": "any",
+    "RepoUrl": "https://github.com/denghaoxuan991876906/PixelPerfect",
+    "Tags": [
+      "判定点",
+      "覆盖层",
+      "指示器"
+    ],
+    "DalamudApiLevel": 15,
+    "AcceptsFeedback": true,
+    "DownloadLinkInstall": "https://github.com/denghaoxuan991876906/DalamudPlugins/releases/download/PixelPerfect-v3.3.4.0/latest.zip",
+    "DownloadLinkUpdate": "https://github.com/denghaoxuan991876906/DalamudPlugins/releases/download/PixelPerfect-v3.3.4.0/latest.zip",
+    "LastUpdate": 0,
+    "IsHide": "False",
+    "IsTestingExclusive": "False"
+  },
+  {
+    "Author": "嗨呀",
     "Name": "RemoteRelay",
     "InternalName": "RemoteRelay",
     "AssemblyVersion": "0.1.5.6",
